@@ -22,7 +22,7 @@ public class CidadeBusinessImpl implements CidadeBusiness {
 	public Cidade create(Cidade cidade) throws BusinessException {
 		if (StringUtils.isEmpty(cidade.getNome()))
 			throw new BusinessException("Nome Requerido!");
-		if (StringUtils.isEmpty(cidade.getEstado()))
+		if (cidade.getEstado() == null)
 			throw new BusinessException("Estado Requerido!");
 
 		return dao.create(cidade);
