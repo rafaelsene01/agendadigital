@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.iftm.business.BusinessException;
-import br.com.iftm.business.TipoServicoBusiness;
-import br.com.iftm.entity.TipoServico;
+import br.com.iftm.business.CidadeBusiness;
+import br.com.iftm.entity.Cidade;
 
 @RestController // Habilita classe como um servico rest.
 @RequestMapping(value = "cidade") // Nome do servico.
 public class CidadeRast {
 
 	@Autowired
-	private TipoServicoBusiness business;
+	private CidadeBusiness business;
 
 	// create
 	@PostMapping()
-	public ResponseEntity<?> create(@RequestBody TipoServico tipoServico) {
+	public ResponseEntity<?> create(@RequestBody Cidade cidade) {
 
 		try {
-			tipoServico = business.create(tipoServico);
+			cidade = business.create(cidade);
 
-			return ResponseEntity.ok(tipoServico);
+			return ResponseEntity.ok(cidade);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 
@@ -66,12 +66,12 @@ public class CidadeRast {
 
 	// update
 	@PutMapping
-	public ResponseEntity<?> update(@RequestBody TipoServico tipoServico) {
+	public ResponseEntity<?> update(@RequestBody Cidade cidade) {
 
 		try {
-			tipoServico = business.update(tipoServico);
+			cidade = business.update(cidade);
 
-			return ResponseEntity.ok(tipoServico);
+			return ResponseEntity.ok(cidade);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 
@@ -107,7 +107,7 @@ public class CidadeRast {
 	public ResponseEntity<?> readByName(@PathParam("nome") String nome) {
 
 		try {
-			List<TipoServico> readByName = business.readByName(nome);
+			List<Cidade> readByName = business.readByName(nome);
 
 			if (readByName.isEmpty())
 				return ResponseEntity.notFound().build();

@@ -25,7 +25,6 @@ public class TipoSernicoDAOImpl implements TipoServicoDAO {
 
 	@Override
 	public List<TipoServico> read() {
-		// TODO Auto-generated method stub
 		return lista;
 	}
 
