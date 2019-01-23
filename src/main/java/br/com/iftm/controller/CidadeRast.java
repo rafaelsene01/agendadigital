@@ -131,7 +131,7 @@ public class CidadeRast {
 		try {
 			List<Cidade> readByEstado = business.readByEstado(estado);
 
-			if (readByEstado.isEmpty())
+			if (readByEstado == null || readByEstado.isEmpty())
 				return ResponseEntity.notFound().build();
 
 			return ResponseEntity.ok(readByEstado);
