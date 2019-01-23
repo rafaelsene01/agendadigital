@@ -64,7 +64,7 @@ public class CidadeBusinessImpl implements CidadeBusiness {
 
 	@Override
 	public List<Cidade> readByEstado(Estado estado) throws BusinessException {
-		if (StringUtils.isEmpty(estado))
+		if (estado == null)
 			throw new BusinessException("Estado Requerido!");
 
 		return dao.readByEstado(estado);
