@@ -48,6 +48,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 			if (cidade2.getCodigo().equals(cidade.getCodigo())) {
 				cidade2.setNome(cidade.getNome());
 				cidade2.setEstado(cidade.getEstado());
+				break;
 			}
 		}
 		return cidade;

@@ -1,16 +1,54 @@
 package br.com.iftm.entity;
 
+import java.util.List;
+
 import br.com.iftm.enums.TipoLogradouro;
 
 public class PrestadorServico {
 	private Integer codigo;
 	private String nome;
 	private Cidade cidade;
+	private String bairro;
+	private String cep;
 	private TipoLogradouro tipoLogradouro;
 	private String logradouro;
 	private String complemento;
 	private String numero;
 	private String email;
+	private List<Telefone> telefone;
+	private List<TipoServico> tipoServicos;
+
+	public List<TipoServico> getTipoServicos() {
+		return tipoServicos;
+	}
+
+	public void setTipoServicos(List<TipoServico> tipoServicos) {
+		this.tipoServicos = tipoServicos;
+	}
+
+	public List<Telefone> getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(List<Telefone> telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
 	public Integer getCodigo() {
 		return codigo;

@@ -22,7 +22,7 @@ import br.com.iftm.enums.Estado;
 
 @RestController // Habilita classe como um servico rest.
 @RequestMapping(value = "cidade") // Nome do servico.
-public class CidadeRast {
+public class CidadeRest {
 
 	@Autowired
 	private CidadeBusiness business;

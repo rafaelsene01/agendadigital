@@ -43,8 +43,10 @@ public class TipoSernicoDAOImpl implements TipoServicoDAO {
 	@Override
 	public TipoServico update(TipoServico tipoServico) {
 		for (TipoServico tipoServico2 : lista) {
-			if (tipoServico2.getCodigo().equals(tipoServico.getCodigo()))
+			if (tipoServico2.getCodigo().equals(tipoServico.getCodigo())) {
 				tipoServico2.setNome(tipoServico.getNome());
+				break;
+			}
 		}
 		return tipoServico;
 	}

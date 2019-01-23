@@ -3,7 +3,7 @@ package br.com.iftm.entity;
 public class ServicoPrestado {
 	private PrestacaoServico prestacaoServico;
 	private TipoServico tipoServico;
-	private double valor;
+	private Double valor;
 
 	public PrestacaoServico getPrestacaoServico() {
 		return prestacaoServico;
