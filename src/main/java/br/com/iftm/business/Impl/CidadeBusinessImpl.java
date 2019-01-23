@@ -61,4 +61,12 @@ public class CidadeBusinessImpl implements CidadeBusiness {
 		dao.delete(id);
 	}
 
+	@Override
+	public List<Cidade> readByEstado(String estado) throws BusinessException {
+		if (StringUtils.isEmpty(estado))
+			throw new BusinessException("Estado Requerido!");
+
+		return dao.readByEstado(estado);
+	}
+
 }

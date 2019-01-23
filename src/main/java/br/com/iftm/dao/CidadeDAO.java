@@ -55,4 +55,6 @@ public interface CidadeDAO {
 	 * @throws BusinessException
 	 */
 	void delete(Integer id) throws BusinessException;
+
+	List<Cidade> readByEstado(String estado) throws BusinessException;
 }

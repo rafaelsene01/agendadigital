@@ -123,4 +123,25 @@ public class CidadeRast {
 			return ResponseEntity.badRequest().body(e);
 		}
 	}
+
+	@GetMapping("/filtro/estado")
+	public ResponseEntity<?> readByEstado(@PathParam("estado") String estado) {
+
+		try {
+			List<Cidade> readByEstado = business.readByEstado(estado);
+
+			if (readByEstado.isEmpty())
+				return ResponseEntity.notFound().build();
+
+			return ResponseEntity.ok(readByEstado);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+
+			return ResponseEntity.badRequest().body(e);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return ResponseEntity.badRequest().body(e);
+		}
+	}
 }

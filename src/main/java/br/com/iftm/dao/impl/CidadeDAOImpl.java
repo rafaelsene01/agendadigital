@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.iftm.business.BusinessException;
 import br.com.iftm.dao.CidadeDAO;
 import br.com.iftm.entity.Cidade;
 
@@ -59,6 +60,17 @@ public class CidadeDAOImpl implements CidadeDAO {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public List<Cidade> readByEstado(String estado) throws BusinessException {
+		List<Cidade> listaRetorno = new ArrayList<>();
+		for (Cidade cidade : lista) {
+			if (cidade.getEstado().toString().equals(estado)) {
+				listaRetorno.add(cidade);
+			}
+		}
+		return listaRetorno;
 	}
 
 }
