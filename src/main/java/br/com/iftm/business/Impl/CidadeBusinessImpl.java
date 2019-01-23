@@ -45,7 +45,7 @@ public class CidadeBusinessImpl implements CidadeBusiness {
 
 		if (StringUtils.isEmpty(cidade.getNome()))
 			throw new BusinessException("Nome Requerido!");
-		if (StringUtils.isEmpty(cidade.getEstado()))
+		if (cidade.getEstado() == null)
 			throw new BusinessException("Estado Requerido!");
 		if (cidade.getCodigo() == null)
 			throw new BusinessException("Codigo Requerido!");
