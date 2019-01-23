@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.iftm.business.BusinessException;
 import br.com.iftm.entity.Cidade;
 import br.com.iftm.entity.TipoServico;
+import br.com.iftm.enums.Estado;
 
 public interface CidadeDAO {
 
@@ -56,5 +57,5 @@ public interface CidadeDAO {
 	 */
 	void delete(Integer id) throws BusinessException;
 
-	List<Cidade> readByEstado(String estado) throws BusinessException;
+	List<Cidade> readByEstado(Estado estado) throws BusinessException;
 }

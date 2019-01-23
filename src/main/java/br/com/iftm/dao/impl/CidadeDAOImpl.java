@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.iftm.business.BusinessException;
 import br.com.iftm.dao.CidadeDAO;
 import br.com.iftm.entity.Cidade;
+import br.com.iftm.enums.Estado;
 
 @Repository
 public class CidadeDAOImpl implements CidadeDAO {
@@ -63,10 +64,10 @@ public class CidadeDAOImpl implements CidadeDAO {
 	}
 
 	@Override
-	public List<Cidade> readByEstado(String estado) throws BusinessException {
+	public List<Cidade> readByEstado(Estado estado) throws BusinessException {
 		List<Cidade> listaRetorno = new ArrayList<>();
 		for (Cidade cidade : lista) {
-			if (cidade.getEstado().toString().equals(estado)) {
+			if (cidade.getEstado().equals(estado)) {
 				listaRetorno.add(cidade);
 			}
 		}

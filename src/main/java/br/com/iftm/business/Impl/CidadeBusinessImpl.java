@@ -10,6 +10,7 @@ import br.com.iftm.business.BusinessException;
 import br.com.iftm.business.CidadeBusiness;
 import br.com.iftm.dao.CidadeDAO;
 import br.com.iftm.entity.Cidade;
+import br.com.iftm.enums.Estado;
 
 @Service
 public class CidadeBusinessImpl implements CidadeBusiness {
@@ -62,7 +63,7 @@ public class CidadeBusinessImpl implements CidadeBusiness {
 	}
 
 	@Override
-	public List<Cidade> readByEstado(String estado) throws BusinessException {
+	public List<Cidade> readByEstado(Estado estado) throws BusinessException {
 		if (StringUtils.isEmpty(estado))
 			throw new BusinessException("Estado Requerido!");
 

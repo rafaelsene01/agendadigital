@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.iftm.business.BusinessException;
 import br.com.iftm.business.CidadeBusiness;
 import br.com.iftm.entity.Cidade;
+import br.com.iftm.enums.Estado;
 
 @RestController // Habilita classe como um servico rest.
 @RequestMapping(value = "cidade") // Nome do servico.
@@ -125,7 +126,7 @@ public class CidadeRast {
 	}
 
 	@GetMapping("/filtro/estado")
-	public ResponseEntity<?> readByEstado(@PathParam("estado") String estado) {
+	public ResponseEntity<?> readByEstado(@PathParam("estado") Estado estado) {
 
 		try {
 			List<Cidade> readByEstado = business.readByEstado(estado);
