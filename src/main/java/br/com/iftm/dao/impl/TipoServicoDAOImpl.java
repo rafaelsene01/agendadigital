@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,7 @@ public class TipoServicoDAOImpl implements TipoServicoDAO {
 
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(TipoServico.class);
 
-		criteria.add(Restrictions.like("nome", nome).ignoreCase());
+		criteria.add(Restrictions.like("nome", nome, MatchMode.ANYWHERE).ignoreCase());
 
 		return criteria.list();
 	}

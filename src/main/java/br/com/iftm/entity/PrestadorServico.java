@@ -1,37 +1,79 @@
 package br.com.iftm.entity;
 
-import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import br.com.iftm.enums.TipoLogradouro;
 
+@Entity
+@Table(name = "TB_PRESTADORSERVICO", schema = "GAD")
+@SequenceGenerator(name = "SQ_PRESTADORSERVICO", sequenceName = "SQ_PRESTADORSERVICO", initialValue = 1, allocationSize = 1, schema = "GAD")
 public class PrestadorServico {
+
+	@Id
+	@GeneratedValue(generator = "SQ_PRESTADORSERVICO", strategy = GenerationType.SEQUENCE)
+	@Column(name = "CODIGO_PRESTADORSERVICO")
 	private Integer codigo;
+	@Column(name = "NOME_PRESTADORSERVICO", nullable = false, length = 100)
 	private String nome;
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Cidade.class)
+	@JoinColumn(name = "CIDADE_PRESTADORSERVICO", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_TB_PRESTADOR_SERV_TB_CIDADE"))
 	private Cidade cidade;
+	@Column(name = "BAIRRO_PRESTADORSERVICO", nullable = false, length = 50)
 	private String bairro;
+	@Column(name = "CEP_PRESTADORSERVICO", length = 10)
 	private String cep;
+	@Column(name = "TIPOLOGR_PRESTADORSERVICO", nullable = false, length = 15)
+	@Enumerated(EnumType.STRING)
 	private TipoLogradouro tipoLogradouro;
+	@Column(name = "LOGR_PRESTADORSERVICO", nullable = false, length = 100)
 	private String logradouro;
+	@Column(name = "COMP_PRESTADORSERVICO", length = 100)
 	private String complemento;
-	private String numero;
+	@Column(name = "NUMERO_PRESTADORSERVICO", nullable = false)
+	private Integer numero;
+	@Column(name = "EMAIL_PRESTADORSERVICO", length = 80)
 	private String email;
-	private List<Telefone> telefone;
-	private List<TipoServico> tipoServicos;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "prestadorServico", orphanRemoval = true, targetEntity = Telefone.class)
+	private Set<Telefone> telefone;
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, targetEntity = TipoServico.class)
+	@JoinTable(name = "TB_SERVICOPRESTADO", joinColumns = {
+			@JoinColumn(name = "CODIGO_PRESTADORSERVICO") }, inverseJoinColumns = {
+					@JoinColumn(name = "CODIGO_TIPOSERVICO") }, schema = "GAD")
+	private Set<TipoServico> tipoServicos;
 
-	public List<TipoServico> getTipoServicos() {
-		return tipoServicos;
-	}
-
-	public void setTipoServicos(List<TipoServico> tipoServicos) {
-		this.tipoServicos = tipoServicos;
-	}
-
-	public List<Telefone> getTelefone() {
+	public Set<Telefone> getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(List<Telefone> telefone) {
+	public void setTelefone(Set<Telefone> telefone) {
 		this.telefone = telefone;
+	}
+
+	public Set<TipoServico> getTipoServicos() {
+		return tipoServicos;
+	}
+
+	public void setTipoServicos(Set<TipoServico> tipoServicos) {
+		this.tipoServicos = tipoServicos;
 	}
 
 	public String getCep() {
@@ -98,11 +140,11 @@ public class PrestadorServico {
 		this.complemento = complemento;
 	}
 
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
