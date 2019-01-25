@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.iftm.business.BusinessException;
 import br.com.iftm.business.PrestadorServicoBusiness;
+import br.com.iftm.controller.dto.FiltroPrestadorDTO;
 import br.com.iftm.entity.PrestadorServico;
 
 @RestController // Habilita classe como um servico rest.
@@ -47,10 +48,10 @@ public class PrestadorServicoRest {
 	}
 
 	// read
-	@GetMapping
-	public ResponseEntity<?> read() {
+	@PostMapping("/filtros")
+	public ResponseEntity<?> readByFiltros(@RequestBody FiltroPrestadorDTO filtroPrestadorDTO) {
 		try {
-			return ResponseEntity.ok(business.read());
+			return ResponseEntity.ok(business.readByFiltros(filtroPrestadorDTO));
 
 		} catch (BusinessException e) {
 			e.printStackTrace();

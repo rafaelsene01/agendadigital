@@ -8,7 +8,10 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
+import br.com.iftm.business.BusinessException;
+import br.com.iftm.controller.dto.FiltroPrestadorDTO;
 import br.com.iftm.dao.PrestadorServicoDAO;
 import br.com.iftm.entity.PrestadorServico;
 
@@ -56,6 +59,24 @@ public class PrestadorServicoDAOImpl implements PrestadorServicoDAO {
 
 		PrestadorServico prestadorServico = sessionFactory.getCurrentSession().get(PrestadorServico.class, id);
 		sessionFactory.getCurrentSession().delete(prestadorServico);
+	}
+
+	@Override
+	public List<PrestadorServico> readByFiltros(FiltroPrestadorDTO filtroPrestadorDTO) throws BusinessException {
+
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PrestadorServico.class);
+		Criteria criteriaCidade = criteria.createCriteria("cidade");
+
+		if (!StringUtils.isEmpty(filtroPrestadorDTO.getNome()))
+			criteria.add(Restrictions.like("nome", filtroPrestadorDTO.getNome(), MatchMode.ANYWHERE).ignoreCase());
+		if (filtroPrestadorDTO.getEstado() != null)
+			criteriaCidade.add(Restrictions.eq("estado", filtroPrestadorDTO.getEstado()));
+		if (filtroPrestadorDTO.getCidade() != null && filtroPrestadorDTO.getCidade().getCodigo() != null)
+			criteria.add(Restrictions.eq("cidade", filtroPrestadorDTO.getCidade()));
+		if (filtroPrestadorDTO.getTipoServicos() != null && filtroPrestadorDTO.getTipoServicos().isEmpty())
+			criteria.add(Restrictions.in("tipoServicos", filtroPrestadorDTO.getTipoServicos()));
+
+		return criteria.list();
 	}
 
 }
