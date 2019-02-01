@@ -48,6 +48,24 @@ public class PrestadorServicoRest {
 	}
 
 	// read
+	@GetMapping()
+	public ResponseEntity<?> read() {
+		try {
+			return ResponseEntity.ok(business.read());
+
+		} catch (BusinessException e) {
+			e.printStackTrace();
+
+			return ResponseEntity.badRequest().body(e);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return ResponseEntity.badRequest().body(e);
+		}
+
+	}
+
+	// read
 	@PostMapping("/filtros")
 	public ResponseEntity<?> readByFiltros(@RequestBody FiltroPrestadorDTO filtroPrestadorDTO) {
 		try {

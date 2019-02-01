@@ -1,6 +1,7 @@
 package br.com.iftm.dao.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import br.com.iftm.business.BusinessException;
 import br.com.iftm.controller.dto.FiltroPrestadorDTO;
 import br.com.iftm.dao.PrestadorServicoDAO;
 import br.com.iftm.entity.PrestadorServico;
+import br.com.iftm.entity.TipoServico;
 
 @Repository
 public class PrestadorServicoDAOImpl implements PrestadorServicoDAO {
@@ -74,7 +76,8 @@ public class PrestadorServicoDAOImpl implements PrestadorServicoDAO {
 		if (filtroPrestadorDTO.getCidade() != null && filtroPrestadorDTO.getCidade().getCodigo() != null)
 			criteria.add(Restrictions.eq("cidade", filtroPrestadorDTO.getCidade()));
 		if (filtroPrestadorDTO.getTipoServicos() != null && filtroPrestadorDTO.getTipoServicos().isEmpty())
-			criteria.add(Restrictions.in("tipoServicos", filtroPrestadorDTO.getTipoServicos()));
+			criteria.add(Restrictions.in("tipoServicos", filtroPrestadorDTO.getTipoServicos().stream()
+					.map(TipoServico::getCodigo).collect(Collectors.toList())));// filtro com erro
 
 		return criteria.list();
 	}
